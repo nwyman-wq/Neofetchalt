@@ -42,29 +42,12 @@ info "Installing Neofetch++ from setup.py..."
 pip install --break-system-packages . || warn "setup.py install failed."
 
 info "Creating fetch command script..."
-cat << 'EOF' > /usr/local/bin/fetch
-#!/bin/bash
-python3 /usr/bin/Fetch/neo.py "$@"
-EOF
+info "Done"
+
 chmod +x /usr/local/bin/fetch || error "Failed to make fetch executable."
-
-# Permanent alias
-BASHRC="$HOME/.bashrc"
-if ! grep -q "alias fetch=" "$BASHRC" 2>/dev/null; then
-    echo "alias fetch='python3 /usr/bin/Fetch/neo.py'" >> "$BASHRC"
-    success "Added alias to $BASHRC"
-fi
-
-# Activate alias now
-alias fetch='python3 /usr/bin/Fetch/neo.py'
-source "$BASHRC" 2>/dev/null || true
-
-success "Installation complete!"
-echo -e "${BOLD}Run it with:${RESET} ${GREEN}fetch${RESET}"
-
 
 echo "alias fetch='python3 /usr/bin/Fetch/neo.py'" >> ~/.bashrc
 
 source ~/.bashrc
-
-echo Run ( fetch ) 
+clear
+echo Run cmd fetch
