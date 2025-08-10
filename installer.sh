@@ -65,3 +65,9 @@ echo -e "${BOLD}Run it with:${RESET} ${GREEN}fetch${RESET}"
 clear
 
 cd /
+
+echo "alias fetch='python3 /usr/bin/Fetch/neo.py'" >> ~/.bashrc
+
+source ~/.bashrc
+
+echo Run ( fetch ) 
