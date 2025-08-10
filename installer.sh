@@ -62,9 +62,6 @@ source "$BASHRC" 2>/dev/null || true
 success "Installation complete!"
 echo -e "${BOLD}Run it with:${RESET} ${GREEN}fetch${RESET}"
 
-clear
-
-cd /
 
 echo "alias fetch='python3 /usr/bin/Fetch/neo.py'" >> ~/.bashrc
 
