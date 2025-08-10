@@ -1,17 +1,19 @@
 #!/bin/bash
 set -e
 
-# Update package lists
+echo "[*] Updating packages..."
 apt-get update -y
 
-# Install curl and git
+echo "[*] Installing curl, git, and python3-pip..."
 apt-get install -y curl git python3-pip
 
-# Clone the repo
+echo "[*] Cloning Neofetch- repository..."
+rm -rf Neofetch-
 git clone https://github.com/nwyman-wq/Neofetch-.git
 
-# Go into the directory
 cd Neofetch-
 
-# Install Python package from current directory
+echo "[*] Installing Python package..."
 pip install .
+
+echo "[*] Installation complete!"
