@@ -21,19 +21,11 @@ pip install --break-system-packages -r requirements.txt
 echo "[*] Installing Neofetch++ from setup.py..."
 pip install --break-system-packages .
 
-# Determine install location for 'fetch'
-if [ "$(id -u)" -eq 0 ]; then
-    INSTALL_PATH="/usr/local/bin"
-else
-    INSTALL_PATH="$HOME/.local/bin"
-    mkdir -p "$INSTALL_PATH"
-    if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
-        echo 'export PATH="$HOME/.local/bin:$PATH"' >> "$HOME/.bashrc"
-        echo "[*] Added ~/.local/bin to your PATH (reload shell to apply)"
-    fi
-fi
+# Always install globally for root
+INSTALL_PATH="/usr/local/bin"
+mkdir -p "$INSTALL_PATH"
 
-echo "[*] Creating fetch command at $INSTALL_PATH/fetch..."
+echo "[*] Creating fetch command..."
 cat << EOF > "$INSTALL_PATH/fetch"
 #!/bin/bash
 python3 "$(pwd)/neo.py" "\$@"
@@ -41,5 +33,10 @@ EOF
 
 chmod +x "$INSTALL_PATH/fetch"
 
+# Make sure /usr/local/bin is in PATH now
+if [[ ":$PATH:" != *":/usr/local/bin:"* ]]; then
+    export PATH="/usr/local/bin:$PATH"
+fi
+
 echo "[*] Done!"
-echo "Run it with: fetch"
+echo "Run it now with: fetch"
