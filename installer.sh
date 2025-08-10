@@ -15,8 +15,11 @@ git clone https://github.com/nwyman-wq/Neofetch-.git
 
 cd Neofetch-
 
-echo "[*] Installing Neofetch++..."
-pip install --user .
+echo "[*] Installing Python dependencies..."
+pip install --break-system-packages -r requirements.txt
+
+echo "[*] Installing Neofetch++ from setup.py..."
+pip install --break-system-packages .
 
 # Determine install location for 'fetch'
 if [ "$(id -u)" -eq 0 ]; then
@@ -24,7 +27,6 @@ if [ "$(id -u)" -eq 0 ]; then
 else
     INSTALL_PATH="$HOME/.local/bin"
     mkdir -p "$INSTALL_PATH"
-    # Ensure ~/.local/bin is in PATH
     if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
         echo 'export PATH="$HOME/.local/bin:$PATH"' >> "$HOME/.bashrc"
         echo "[*] Added ~/.local/bin to your PATH (reload shell to apply)"
@@ -32,9 +34,9 @@ else
 fi
 
 echo "[*] Creating fetch command at $INSTALL_PATH/fetch..."
-cat << 'EOF' > "$INSTALL_PATH/fetch"
+cat << EOF > "$INSTALL_PATH/fetch"
 #!/bin/bash
-python3 -m neofetch "$@"
+python3 "$(pwd)/neo.py" "\$@"
 EOF
 
 chmod +x "$INSTALL_PATH/fetch"
