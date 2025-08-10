@@ -27,13 +27,26 @@ pip install --break-system-packages -r requirements.txt
 echo "[*] Installing Neofetch++ from setup.py..."
 pip install --break-system-packages .
 
+# Create /usr/local/bin/fetch script for universal command
 echo "[*] Creating fetch command..."
 cat << 'EOF' > /usr/local/bin/fetch
 #!/bin/bash
 python3 /usr/bin/Fetch/neo.py "$@"
 EOF
-
 chmod +x /usr/local/bin/fetch
 
+# Add permanent alias to ~/.bashrc
+BASHRC="$HOME/.bashrc"
+if ! grep -q "alias fetch=" "$BASHRC"; then
+    echo "alias fetch='python3 /usr/bin/Fetch/neo.py'" >> "$BASHRC"
+    echo "[*] Added alias to $BASHRC"
+fi
+
+# Apply alias immediately
+alias fetch='python3 /usr/bin/Fetch/neo.py'
+
+# Removing the Extra Details
+clear
+cd ~
 echo "[*] Done!"
-echo "Run it with: fetch"
+echo "You can run it now with: fetch"
