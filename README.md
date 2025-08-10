@@ -1,6 +1,9 @@
-Install Neofetch++ i.e. Fetch
+# Neofetch++
 
-```bash <(curl -s https://raw.githubusercontent.com/nwyman-wq/Neofetchalt/main/installer.sh)
+A modern, enhanced system information tool based on Neofetch.
 
+## Installation
+You can install Neofetch++ with a single command:
 
-Run it using cmd : ```fetch
+```bash
+bash <(curl -s https://raw.githubusercontent.com/nwyman-wq/Neofetchalt/main/installer.sh)
